@@ -65,9 +65,8 @@ public class MainActivityFragment extends Fragment {
 
 
     private void abrirMapa(){
-        map.setTileSource(TileSourceFactory.MAPQUESTOSM);
+        map.setTileSource(TileSourceFactory.MAPNIK);
         map.setTilesScaledToDpi(true);
-
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
     }
@@ -112,17 +111,17 @@ public class MainActivityFragment extends Fragment {
         mCompassOverlay.enableCompass();
 
         map.getOverlays().add(myLocationOverlay);
-        map.getOverlays().add(this.mMinimapOverlay);
+       //map.getOverlays().add(this.mMinimapOverlay);
         map.getOverlays().add(this.mScaleBarOverlay);
         map.getOverlays().add(this.mCompassOverlay);
     }
 
 
     private void ponMarkers(){
-
         agruparMarkers();
 
-        ConnectFirebase app = (ConnectFirebase) getActivity().getApplication();
+        MyApp app = (MyApp) getActivity().getApplication();
+
         Firebase ref = app.getRef();
 
         final Firebase stats = ref.child("stations");
@@ -156,7 +155,7 @@ public class MainActivityFragment extends Fragment {
                         marker.setIcon(getResources().getDrawable(R.drawable.bikeyellow));
 
                     }
-                    else if(bici.getSlots()> 25){
+                    else if(bici.getSlots()> 15){
                         marker.setIcon(getResources().getDrawable(R.drawable.bike));
 
                     }
@@ -179,10 +178,11 @@ public class MainActivityFragment extends Fragment {
         bicingMarker = new RadiusMarkerClusterer(getContext());
         map.getOverlays().add(bicingMarker);
 
-        Drawable clusterIconD = getResources().getDrawable(R.drawable.mapmarkermultiple);
+        Drawable clusterIconD = getResources().getDrawable(R.drawable.mapmarkermultiple
+        );
         Bitmap clusterIcon = ((BitmapDrawable)clusterIconD).getBitmap();
 
         bicingMarker.setIcon(clusterIcon);
-        bicingMarker.setRadius(75);
+        bicingMarker.setRadius(100);
     }
 }

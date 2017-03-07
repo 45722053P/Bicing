@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-        if(id == R.id.lista_Parada){
+        if(id == R.id.Paradas){
 
-            Intent i = new Intent(this, ListaActivity.class);
+            Intent i = new Intent(this, ListaActivityNew.class);
 
             startActivity(i);
             return true;

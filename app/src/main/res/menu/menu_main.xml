@@ -9,7 +9,7 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/lista_Parada"
+        android:id="@+id/Paradas"
         android:orderInCategory="100"
         android:title="@string/listaParadas"
         app:showAsAction="never" />
