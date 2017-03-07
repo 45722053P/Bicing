@@ -2,5 +2,6 @@
     <string name="app_name">Bicing</string>
     <string name="action_settings">Settings</string>
     <string name="listaParadas">Paradas</string>
+    <string name="title_activity_lista1">ListaActivity1</string>
 
 </resources>
