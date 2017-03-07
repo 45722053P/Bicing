@@ -26,8 +26,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ListaActivity1"
-            android:label="@string/title_activity_lista1"
+            android:name=".ListaActivity"
+            android:label="@string/title_activity_lista"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

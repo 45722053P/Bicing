@@ -65,8 +65,9 @@ public class MainActivityFragment extends Fragment {
 
 
     private void abrirMapa(){
-        map.setTileSource(TileSourceFactory.MAPQUESTAERIAL);
+        map.setTileSource(TileSourceFactory.MAPQUESTOSM);
         map.setTilesScaledToDpi(true);
+
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
     }
@@ -119,7 +120,7 @@ public class MainActivityFragment extends Fragment {
 
     private void ponMarkers(){
 
-        setupMarkerOverlay();
+        agruparMarkers();
 
         ConnectFirebase app = (ConnectFirebase) getActivity().getApplication();
         Firebase ref = app.getRef();
@@ -147,7 +148,7 @@ public class MainActivityFragment extends Fragment {
                     marker.setTitle(bici.getStreetName());
                     marker.setAlpha(0.6f);
 
-                    if(bici.getSlots()<= 5){
+                    if(bici.getSlots()<= 7){
                         marker.setIcon(getResources().getDrawable(R.drawable.bikered));
 
                     }
@@ -174,7 +175,7 @@ public class MainActivityFragment extends Fragment {
             }
         });
     }
-    private void setupMarkerOverlay() {
+    private void agruparMarkers() {
         bicingMarker = new RadiusMarkerClusterer(getContext());
         map.getOverlays().add(bicingMarker);
 
@@ -182,6 +183,6 @@ public class MainActivityFragment extends Fragment {
         Bitmap clusterIcon = ((BitmapDrawable)clusterIconD).getBitmap();
 
         bicingMarker.setIcon(clusterIcon);
-        bicingMarker.setRadius(100);
+        bicingMarker.setRadius(75);
     }
 }
