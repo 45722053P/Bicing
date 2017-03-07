@@ -22,6 +22,7 @@ import org.osmdroid.bonuspack.overlays.Marker;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.MinimapOverlay;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 import org.osmdroid.views.overlay.compass.CompassOverlay;
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider;
@@ -35,12 +36,13 @@ public class MainActivityFragment extends Fragment {
 
     private MapView map;
     private MyLocationNewOverlay myLocationOverlay;
+    private MinimapOverlay mMinimapOverlay;
     private ScaleBarOverlay mScaleBarOverlay;
     private CompassOverlay mCompassOverlay;
     private IMapController mapController;
     private RadiusMarkerClusterer bicingMarker;
 
-    public MainActivityFragment() {
+    public MainActivityFragment(){
     }
 
     @Override
@@ -62,14 +64,14 @@ public class MainActivityFragment extends Fragment {
     }
 
 
-    private void abrirMapa() {
-        map.setTileSource(TileSourceFactory.MAPNIK);
+    private void abrirMapa(){
+        map.setTileSource(TileSourceFactory.MAPQUESTAERIAL);
         map.setTilesScaledToDpi(true);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
     }
 
-    private void hacerZoom() {
+    private void hacerZoom(){
         mapController = map.getController();
         mapController.setZoom(14);
         //Ponemos un punto geolocalizado para ir directos a barcelona.
@@ -77,7 +79,7 @@ public class MainActivityFragment extends Fragment {
         mapController.setCenter(point);
     }
 
-    private void ponerDespues() {
+    private void ponerDespues(){
         final DisplayMetrics dm = getResources().getDisplayMetrics();
 
         myLocationOverlay = new MyLocationNewOverlay(
@@ -92,6 +94,11 @@ public class MainActivityFragment extends Fragment {
                         .getMyLocation());
             }
         });
+
+        mMinimapOverlay = new MinimapOverlay(getContext(), map.getTileRequestCompleteHandler());
+        mMinimapOverlay.setWidth(dm.widthPixels / 2);
+        mMinimapOverlay.setHeight(dm.heightPixels / 5);
+
         mScaleBarOverlay = new ScaleBarOverlay(map);
         mScaleBarOverlay.setCentred(true);
         mScaleBarOverlay.setScaleBarOffset(dm.widthPixels / 2, 10);
@@ -104,12 +111,13 @@ public class MainActivityFragment extends Fragment {
         mCompassOverlay.enableCompass();
 
         map.getOverlays().add(myLocationOverlay);
+        map.getOverlays().add(this.mMinimapOverlay);
         map.getOverlays().add(this.mScaleBarOverlay);
         map.getOverlays().add(this.mCompassOverlay);
     }
 
 
-    private void ponMarkers() {
+    private void ponMarkers(){
 
         setupMarkerOverlay();
 

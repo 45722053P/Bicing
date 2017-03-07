@@ -1,5 +1,7 @@
 package com.proyecto.bicing;
 
+import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -34,6 +36,14 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if(id == R.id.lista_Parada){
+
+            Intent i = new Intent(this, ListaActivity.class);
+
+            startActivity(i);
+
+
         }
 
         return super.onOptionsItemSelected(item);
